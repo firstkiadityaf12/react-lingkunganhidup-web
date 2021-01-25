@@ -35,6 +35,11 @@ class CardO extends React.Component{
                             <button className="btn btn-sm btn-danger m-1" onClick={this.props.onDrop}>
                                 Hapus
                             </button>
+
+                            {/** button untuk menambah ke keranjang belanja */}
+                            <button className="btn btn-sm btn-success m-1" onClick={this.props.onCart}>
+                                Tambah ke keranjang
+                            </button>
                         </div>
                     </div>
                 </div>

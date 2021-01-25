@@ -18,6 +18,9 @@ class Navbar extends React.Component{
                             <li class="nav-item click">
                                 <Link to="/olshop" className="nav-link text-white">Shop</Link>
                             </li>
+                            <li class="nav-item click">
+                                <Link to="/cart" className="nav-link text-white">Keranjang</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>

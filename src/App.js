@@ -11,6 +11,7 @@ import beranda from "./pages/beranda"
 import kalender from "./pages/kalender"
 import gallery from "./pages/gallery"
 import olshop from './pages/olshop';
+import Cart from './pages/cart';
 
 class App extends React.Component{
   render(){
@@ -23,6 +24,7 @@ class App extends React.Component{
               <Route path="/kalender" component={kalender} />
               <Route path="/gallery" component={gallery} />
               <Route path="/olshop" component={olshop} />
+              <Route path="/cart" component={Cart}/>
             </Switch>
       </div>
     )
