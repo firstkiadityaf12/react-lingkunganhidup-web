@@ -1,25 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+//import component
+import Navbar from "./components/Navbar"
+import Jumbotron from "./components/Jumbotron"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {Switch, Route} from "react-router-dom"
+
+import beranda from "./pages/beranda"
+import kalender from "./pages/kalender"
+import gallery from "./pages/gallery"
+import olshop from './pages/olshop';
+
+class App extends React.Component{
+  render(){
+    return(
+      <div>
+        <Navbar/>
+        <Jumbotron/>
+          <Switch>
+              <Route exact path="/" component={beranda} />
+              <Route path="/kalender" component={kalender} />
+              <Route path="/gallery" component={gallery} />
+              <Route path="/olshop" component={olshop} />
+            </Switch>
+      </div>
+    )
+  }
 }
 
 export default App;
