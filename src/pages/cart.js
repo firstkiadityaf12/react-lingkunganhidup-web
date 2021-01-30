@@ -32,6 +32,24 @@ class Cart extends React.Component{
         })
     }
 
+    //fungsi menghaupus dari cart
+    Drop = (item) => {
+        //beri konfirmasi untuk menghapus data
+        if(window.confirm("apakah anda yakin ingin menghapus data ini?")){
+            //menghapus data
+            let tempEvent = this.state.event
+
+            //posisi index data yang akan dihapus
+            let index = tempEvent.indexOf(item)
+
+            //settelah menemukan hapus data
+            tempEvent.splice(index, 1)
+
+            //kembalikan data ke state buku
+            this.setState({event: tempEvent})
+        }
+    }
+
     //fungsi memanggil init cart setelah di render
     componentDidMount(){
         this.initCart()
@@ -57,6 +75,7 @@ class Cart extends React.Component{
                                     <th>Harga</th>
                                     <th>Qty</th>
                                     <th>Total</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,6 +86,12 @@ class Cart extends React.Component{
                                         <td>{ item.jumlahBeli}</td>
                                         <td>
                                             Rp. {item.harga * item.jumlahBeli}
+                                        </td>
+                                        <td>
+                                        <button className="btn btn-sm btn-danger m-1"
+                                                onClick={() => this.Drop(item)}>
+                                                    Hapus
+                                                </button>
                                         </td>
                                     </tr>
                                 ))}
