@@ -1,4 +1,5 @@
 import React from "react"
+import { string } from "prop-types";
 
 class Cart extends React.Component{
     constructor(){
@@ -7,6 +8,7 @@ class Cart extends React.Component{
             cart: [], //unruk menyimpan list cart
             user: "", //untuk menyimpan data namauser
             total: 0, //untuk menyimpan data total belanja
+            selectedItem: null
         }
     }
 
@@ -50,6 +52,42 @@ class Cart extends React.Component{
         }
     }
 
+    // menambahkan Fuction ADD cart
+    Add = (item) => {
+        let tempCart = this.state.cart
+        let index = tempCart.indexOf(item)
+
+        tempCart[index].jumlahBeli = parseInt(item.jumlahBeli) + 1
+
+        this.setState({ cart: tempCart })
+
+        let stringcart = JSON.stringify(this.state.cart)
+
+        localStorage.setItem("cart", stringcart)
+    }
+
+    // fungsi untuk mengurangi item atau mendistract item
+    substract = (item) => {
+        let tempCart = this.state.cart
+        let index = tempCart.indexOf(item)
+
+        if (item.jumlahBeli <= 1) {
+            if (window.confirm("apakah anda yakin menghapus barang dari keranjang? ")) {
+                tempCart.splice({ cart: tempCart })
+                this.setState({ cart: tempCart })
+            } else {
+                this.setState({ cart: tempCart })
+            }
+        } else {
+            tempCart[index].jumlahBeli = parseInt(item.jumlahBeli) - 1
+            this.setState({cart: tempCart})
+        }
+
+        //localstorage
+        let stringcart = JSON.stringify(this.state.cart)
+        localStorage.setItem("cart", stringcart)
+    }
+
     //fungsi memanggil init cart setelah di render
     componentDidMount(){
         this.initCart()
@@ -88,10 +126,18 @@ class Cart extends React.Component{
                                             Rp. {item.harga * item.jumlahBeli}
                                         </td>
                                         <td>
-                                        <button className="btn btn-sm btn-danger m-1"
+                                            <button className="btn btn-sm btn-danger m-1"
                                                 onClick={() => this.Drop(item)}>
                                                     Hapus
-                                                </button>
+                                            </button>
+                                            <button className="btn btn-sm btn-success m-1"
+                                                onClick={() => this.Add(item)}>
+                                                    Tambah
+                                            </button>
+                                            <button className="btn btn-sm btn-warning m-1"
+                                                onClick={() => this.substract(item)}>
+                                                    Kurang
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
